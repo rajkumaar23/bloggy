@@ -46,7 +46,7 @@ require_once 'html_header.php';
 
     <li><a href="addpost.php">Add post</a></li>
     <li><a class="active" href="/about.php">About</a></li>
-    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $_COOKIE['username'] ?></a></li>
+    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $_SESSION['username'] ?></a></li>
 </ul>
 <br>
 <img class="profile-pic" src="images/profile.jpg">
