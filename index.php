@@ -1,8 +1,10 @@
 <?php
 require_once 'intialise.php';
 session_start();
-setcookie('username','',time()+(86400*30),"/");
-setcookie('password','',time()+(86400*30),"/");
+if(isset($_COOKIE['username'])){
+    setcookie('username','',time()+(86400*30),"/");
+    setcookie('password','',time()+(86400*30),"/");
+}
 if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])){
     header("Location: login");
 }
