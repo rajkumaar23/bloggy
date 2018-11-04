@@ -1,11 +1,13 @@
 <?php
 require_once 'intialise.php';
 session_start();
-if(isset($_COOKIE['username'])){
-    setcookie('username','',time()+(86400*30),"/");
-    setcookie('password','',time()+(86400*30),"/");
-}
-if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])){
+if(isset($_SESSION['_token'])){
+    $jwt=$_SESSION['_token'];
+    $user=verify_jwt($jwt);
+    if(!isset($user)){
+        header("Location: login");
+    }
+}else{
     header("Location: login");
 }
 require_once 'html_header.php';
@@ -23,7 +25,7 @@ require_once 'html_header.php';
     <li><a class="active" href="index.php">Home</a></li>
     <li><a href="addpost.php">Add post</a></li>
     <li><a href="about.php">About</a></li>
-    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $_SESSION["username"]; ?></a></li>
+    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $user; ?></a></li>
 </ul>
 <?php
 $result=query("select * from posts order by id desc");
@@ -36,7 +38,7 @@ $result=query("select * from posts order by id desc");
         }
         echo "<h2>" . $post['title'] . "</h2>" . "<p>" . $post['post'] . "</p>" .
             "<h5>Posted on : " . $post['date'] . " by " . $author . "<br><br>";
-        $query = query("select id from users where username='" . $_SESSION["username"] . "'");
+        $query = query("select id from users where username='" . $user . "'");
         $res = mysqli_fetch_assoc($query);
         $id = $res['id'];
         if ((int)$id == (int)$post['user_id']) {

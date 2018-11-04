@@ -1,5 +1,8 @@
 <?php
 require_once '../intialise.php';
+require_once '../vendor/autoload.php';
+use Firebase\JWT\JWT;
+
 session_start();
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $username=clean(h($_POST['username']));
@@ -14,8 +17,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     else if(strcmp($password_in_db['password'] ,$password)!=0){
         $error="PASSWORD INVALID";
     }else{
-        $_SESSION["username"]=$username;
-        $_SESSION["password"]=$password;
+        $issuedAt = time();
+        $expirationTime = $issuedAt + 3600;  // jwt valid for 3600 seconds from the issued time
+        $payload = array(
+            'username' => $username,
+            'iat' => $issuedAt,
+            'exp' => $expirationTime
+        );
+        $key = JWT_KEY;
+        $alg = 'HS256';
+        $jwt = JWT::encode($payload, $key, $alg);
+        $_SESSION['_token']=$jwt;
         header("Location: "."../index.php");
         exit;
     }

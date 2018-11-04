@@ -1,7 +1,13 @@
 <?php
 require_once 'intialise.php';
 session_start();
-if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])){
+if(isset($_SESSION['_token'])){
+    $jwt=$_SESSION['_token'];
+    $user=verify_jwt($jwt);
+    if(!isset($user)){
+        header("Location: login");
+    }
+}else{
     header("Location: login");
 }
 require_once 'html_header.php';
@@ -46,7 +52,7 @@ require_once 'html_header.php';
 
     <li><a href="addpost.php">Add post</a></li>
     <li><a class="active" href="/about.php">About</a></li>
-    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $_SESSION['username'] ?></a></li>
+    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $user ?></a></li>
 </ul>
 <br>
 <img class="profile-pic" src="images/profile.jpg">

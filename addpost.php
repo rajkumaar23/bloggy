@@ -1,7 +1,13 @@
 <?php
 require_once 'intialise.php';
 session_start();
-if(!isset($_SESSION["username"]) && !isset($_SESSION["password"])){
+if(isset($_SESSION['_token'])){
+    $jwt=$_SESSION['_token'];
+    $user=verify_jwt($jwt);
+    if(!isset($user)){
+        header("Location: login");
+    }
+}else{
     header("Location: login");
 }
 global $connection;
@@ -9,8 +15,7 @@ require_once 'html_header.php';
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $title=clean(h($_POST['title']));
     $content=clean(h($_POST['content']));
-    $username=$_SESSION["username"];
-    $query=query("select id from users where username='".$username."'");
+    $query=query("select id from users where username='".$user."'");
     $res=mysqli_fetch_assoc($query);
     $user_id=$res['id'];
     $date=date("Y-m-d");
@@ -30,7 +35,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <li><a href="index.php">Home</a></li>
     <li><a class="active" href="addpost.php">Add post</a></li>
     <li><a href="about.php">About</a></li>
-    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $_SESSION["username"]; ?></a></li>
+    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $user; ?></a></li>
 </ul>
 <div style="
 height: 100vh;

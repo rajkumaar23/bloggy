@@ -1,5 +1,7 @@
 <?php
 require_once 'intialise.php';
+require_once 'vendor/autoload.php';
+use Firebase\JWT\JWT;
 function clean($string=""){
     global $connection;
 return mysqli_real_escape_string($connection,$string);
@@ -27,4 +29,15 @@ function query($sql){
     $res=mysqli_query($connection,$sql);
     return $res;
 }
-?>
+
+function verify_jwt($jwt){
+    $key = JWT_KEY;
+    try {
+        $decoded = JWT::decode($jwt, $key, array('HS256'));
+        $decoded_array = (array)$decoded;
+        return $decoded_array['username'];
+
+    } catch (\Exception $e) {
+        return null;
+    }
+}
