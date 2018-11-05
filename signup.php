@@ -4,12 +4,20 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $name=clean($_POST['name']);
     $username=clean($_POST['username']);
     $password=clean($_POST['password']);
-    $query=query("insert into users(name,username,password) values('".$name."','".$username."','".$password."')");
-    if(!$query)
-        echo "Failed";
-    else {
-    header("Location: "."login");
-    exit;
+
+    $query=query("select id from users where username='".$username."'");
+    $res=mysqli_fetch_assoc($query);
+
+    if(isset($res)){
+        $error="Username already taken";
+    }else{
+        $query=query("insert into users(name,username,password) values('".$name."','".$username."','".$password."')");
+        if(!$query)
+            $error="Couldn't sign up. Please try again after sometime.";
+        else {
+            header("Location: "."login");
+            exit;
+        }
     }
 }
 require_once 'html_header.php';
@@ -22,7 +30,6 @@ height: 100vh;
 background-image: url('images/train.jpg');
 no-repeat center center fixed; background-size: cover;
 ">
-
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <h1 style="color: #000;font-family: 'Niramit', sans-serif;
 ">Bloggy | Signup</h1>
