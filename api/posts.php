@@ -42,8 +42,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
     echo json_encode($json_res);
 
 }else{
-    header("HTTP/1.1 403 Forbidden");
-    echo "<h1>Error 403 | Access Denied</h1>";
+    header("HTTP/1.1 401");
 }
 
 function getAuthorizationHeader(){

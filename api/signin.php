@@ -42,6 +42,5 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     header("Content-Type: application/json");
     echo $result;
 }else{
-    header("HTTP/1.0 403 Forbidden");
-    echo "<h1>Error 403 | Access Denied</h1>";
+    header("HTTP/1.0 401");
 }
