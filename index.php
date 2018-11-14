@@ -1,16 +1,9 @@
 <?php
 require_once 'intialise.php';
-session_start();
-if(isset($_SESSION['_token'])){
-    $jwt=$_SESSION['_token'];
-    $user=verify_jwt($jwt);
-    if(!isset($user)){
-        header("Location: login");
-    }
-}else{
+if(!verify_cookie())
     header("Location: login");
-}
 require_once 'html_header.php';
+$user=getUsername();
 ?>
 
 <body>
