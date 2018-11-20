@@ -20,32 +20,50 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 }
 ?>
 
-<body>
-<ul style="background-color:black">
-    <h1 style="color:#fff; text-align: center; font-family: 'Niramit', cursive">Add a post</h1>
-</ul>
-<ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a class="active" href="addpost.php">Add post</a></li>
-    <li><a href="about.php">About</a></li>
-    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $user; ?></a></li>
-</ul>
-<div style="
-height: 100vh;
-    text-align: center;
-background-image: url('images/train.jpg');
-no-repeat center center fixed; background-size: cover;
-">
 
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <br>
-        <input type="text" name="title" placeholder=" Enter title" style="height: 30px" required/>
-        <br><br>
-        <textarea rows="20" cols="40" required name="content"></textarea>
+<br>
+<br>
+<div class="container is-fluid">
+    <h1 class="title">Create a post</h1>
+    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <div class="field">
+            <label class="label" for="title">Post Title</label>
 
-        <p style="color: red;"><?php if(isset($error)){ echo $error; }?></p>
+            <div class="control">
+                <input
+                        type="text"
+                        class="input"
+                        name="title"
+                        value="<?php echo $title; ?>"
+                        required>
+            </div>
+        </div>
 
-        <button name="submit" type="submit" style="text-align: center">Add post </button>
+        <div class="field">
+            <label class="label" for="description">Post Description</label>
+
+            <div class="control">
+                <textarea
+                        name="content"
+                        class="textarea"
+                        required
+                >
+
+                </textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-link">Create Post</button>
+            </div>
+        </div>
+        <?php if(isset($error)){ ?>
+        <div class="notification is-danger">
+            <p><?php echo $error; ?></p>
+        </div>
+        <?php } ?>
+
 
     </form>
 </div>

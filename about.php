@@ -15,47 +15,61 @@ require_once 'html_header.php';
         margin-right: auto;
         border-radius: 100%;
     }
-    h1{
-        color: white;text-align: center; font-family: 'Niramit', sans-serif;
-    }
-    h2{
-        text-overline-color: black;text-align: center; font-family: 'Niramit', sans-serif;
-    }
     img{
         horiz-align: center;
     }
     #footer{
-        position: relative;
-        left: 0;
-        bottom: 0;
-        font-size: large;
-        width: 100%;
         font-family: 'Niramit', cursive;
-        text-align: center;
     }#heart{
          color: red;
      }
 </style>
-<body>
-<ul style="background-color:black">
-    <h1>About Developer</h1>
-</ul>
-<ul>
-    <li><a href="index.php">Home</a></li>
+<br><br>
+<main class="py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
 
-    <li><a href="addpost.php">Add post</a></li>
-    <li><a class="active" href="/about.php">About</a></li>
-    <li style="float:right"><a class="activeblack" href="logout.php">Logout, <?php echo $user ?></a></li>
-</ul>
-<br>
-<img class="profile-pic" src="images/profile.jpg">
-<h2>Developed by <br> <a href="http://rajkumaar.co.in"> RAJKUMAR </a></h2>
-<footer id="footer">
-    <div>
-        <h4>Made with <span id="heart">&hearts;</span> by Rajkumar &copy; <?php echo date('Y'); ?> </h4>
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48">
+                                            <img src="https://rajkumaar.co.in/images/profile-pic.jpg" alt="Rajkumar">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <p class="title is-4">Rajkumar</p>
+                                        <p class="subtitle is-6">Android & Backend Developer</p>
+                                    </div>
+                                </div>
+
+                                <div class="content">
+                                    An ambitious engineering sophomore, primarily focused and proficient in Android App Development with up-to-date knowledge about latest frameworks, while also devoted to backend web development in PHP, and a fanboy of Laravel.
+
+                                    Currently working as a C/C++ Teaching Assistant at Internshala, India's no.1 internship and training platform. Responsibilities include answering queries and interacting with students, evaluating and providing feedback for their projects, thus helping them to get confident in the world of programming.
+
+                                    Loves to work in an organisation that believes in gaining a competitive edge and giving back to the community. Hobbies include but not limited to messing around linux terminal, video/photo editing, and carrom.
+                                    <br><a href="https://rajkumaar.co.in">Visit personal website</a>.
+                                    <br>
+                                    2018/11/20 09:11:15 PM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<footer class="footer" id="footer">
+    <div class="content has-text-centered">
+        <p>Made with <span id="heart">&hearts;</span> by Rajkumar &copy; <?php echo date('Y'); ?> </p>
     </div>
 </footer>
-</body>
 </html>
 
 
