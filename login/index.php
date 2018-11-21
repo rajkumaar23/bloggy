@@ -3,6 +3,7 @@ require_once '../intialise.php';
 require_once '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 
+session_start();
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $username=clean(h($_POST['username']));
     $password=clean(h($_POST['password']));
@@ -26,7 +27,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $key = JWT_KEY;
         $alg = 'HS256';
         $jwt = JWT::encode($payload, $key, $alg);
-        cookie_set($jwt);
+        $_SESSION['_token']=$jwt;
         header("Location: "."../index.php");
         exit;
     }

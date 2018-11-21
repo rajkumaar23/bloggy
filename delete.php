@@ -1,7 +1,8 @@
 <?php
 require_once 'intialise.php';
-if(isset($_COOKIE['token'])){
-    $jwt=$_COOKIE['token'];
+session_start();
+if(isset($_SESSION['_token'])){
+    $jwt=$_SESSION['_token'];
     $user=verify_jwt($jwt);
     if(!isset($user)){
         header("Location: login");
@@ -14,8 +15,6 @@ if(isset($_COOKIE['token'])){
             $current_user=mysqli_fetch_assoc($query)['id'];
             if($post_user==$current_user){
                 $query=query("delete from posts where id=".clean($_POST['delete']));
-            }else{
-                header("HTTP/1.1 401");
             }
         }
 

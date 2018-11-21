@@ -15,28 +15,6 @@ function db_connect(){
     return $connection;
 }
 
-function cookie_set($jwt){
-    $cookie_name = "token";
-$cookie_value = $jwt;
-setcookie($cookie_name, $cookie_value, time() + 3600, "/");
-}
-
-function cookie_reset(){
-    $cookie_name = "token";
-$cookie_value = "";
-setcookie($cookie_name, $cookie_value, time() + 3600, "/");
-}
-
-
-function verify_cookie(){
-    if(isset($_COOKIE['token'])){
-        $user=verify_jwt($_COOKIE['token']);
-        if(isset($user))
-            return true;
-    }
-    return false;
-}
-
 function confirm_db_connect(){
     if(mysqli_connect_errno()){
         $msg="Database connection failed. ";
@@ -50,19 +28,6 @@ function query($sql){
     global $connection;
     $res=mysqli_query($connection,$sql);
     return $res;
-}
-
-function getUsername(){
-    $jwt=$_COOKIE['token'];
-    $key = JWT_KEY;
-    try {
-        $decoded = JWT::decode($jwt, $key, array('HS256'));
-        $decoded_array = (array)$decoded;
-        return $decoded_array['username'];
-
-    } catch (\Exception $e) {
-        return null;
-    }
 }
 
 function verify_jwt($jwt){

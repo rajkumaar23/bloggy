@@ -1,5 +1,5 @@
 <?php
-require_once 'intialise.php';
-cookie_reset();
+session_unset();
+session_destroy();
 header("Location: login");
 exit;
