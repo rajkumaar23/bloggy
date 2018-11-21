@@ -1,5 +1,7 @@
 <?php 
 require_once 'intialise.php';
+if(isset($_COOKIE['token'])
+    header("Location: index.php");
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $name=clean($_POST['name']);
     $username=clean($_POST['username']);

@@ -3,6 +3,8 @@ require_once '../intialise.php';
 require_once '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 
+if(isset($_COOKIE['token'])
+    header("Location: index.php");
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $username=clean(h($_POST['username']));
