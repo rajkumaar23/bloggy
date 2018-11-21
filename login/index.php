@@ -53,13 +53,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 no-repeat center center fixed; background-size: cover;">
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <h1 style="color: #000; font-family: 'Niramit', sans-serif;">Bloggy | Login</h1>
+    <h1 style="color: #000; font-family: 'Niramit', sans-serif;
+">Bloggy | Login</h1>
 
-        <input  type="text" name="username" placeholder=" Username" style="height: 30px" required/>
+        <input type="text" name="username" placeholder=" Username" style="height: 30px" required/>
         <br><br>
         <input type="password" name="password" placeholder=" Password" style="height: 30px" required/>
 
     <p style="color: red;"><?php if(isset($error)){ echo $error; }?></p>
+
         <button name="submit" type="submit" style="text-align: center">Login</button>
     <h3 style=" font-family: 'Niramit', cursive"><a style="color:crimson;" href="../signup.php">Create an account</a></h3>
 
