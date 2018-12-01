@@ -3,9 +3,6 @@ require_once '../intialise.php';
 require_once '../vendor/autoload.php';
 
 if($_SERVER['REQUEST_METHOD']=='GET'){
-    $jwt=getBearerToken();
-    $user=verify_jwt($jwt);
-    if(isset($user)){
         $json_res=array();
         $result=query("select * from posts order by id desc");
         while ($post = mysqli_fetch_assoc($result)) {
@@ -32,12 +29,6 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
             );
             array_push($json_res,$current);
         }
-    }else{
-        $json_res=array(
-            'status'=>false,
-            'error'=>"Invalid token"
-        );
-    }
     header("Content-Type: application/json");
     echo json_encode($json_res);
 

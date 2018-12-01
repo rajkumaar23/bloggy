@@ -7,9 +7,7 @@ $user=getUsername();
 ?>
 <body>
 <ul style="background-color:black">
-    <h1 style="color: white;text-align: center; font-family: 'Niramit', sans-serif;
-
-">Bloggy</h1>
+    <h1 style="color: white;text-align: center; font-family: 'Niramit', sans-serif;">Bloggy</h1>
 
 
 </ul>
@@ -29,7 +27,7 @@ $result=query("select * from posts order by id desc");
             $GLOBALS['author'] = $name['name'];
         }
         echo "<h2>" . $post['title'] . "</h2>" . "<p>" . $post['post'] . "</p>" .
-            "<h5>Posted on : " . $post['date'] . " by " . $author . "<br><br>";
+            "<h5>Posted on : " . $post['date'] . " by " . $author . "</h5><br><br>";
         $query = query("select id from users where username='" . $user . "'");
         $res = mysqli_fetch_assoc($query);
         $id = $res['id'];
